@@ -32,6 +32,7 @@ import Pro1 from 'assets/promotion/1.png'
 import Pro2 from 'assets/promotion/2.jpg'
 import Pro3 from 'assets/promotion/3.jpg'
 // import usePlacesByCityData from '@hooks/usePlacesByCityData'
+import Search from 'components/filter/Search'
 import TopDestinationBox from './TopDestinationBox'
 import ServiceBox from './ServiceBox'
 import HomeSectionHeader from './HomeSectionHeader'
@@ -103,6 +104,9 @@ const Home = () => {
               // xl: 'none',
             }}>
             <Image src={Banner} />
+          </Box>
+          <Box>
+            <Search />
           </Box>
           <Box>
             <Box mt={8} marginBottom='8px'>

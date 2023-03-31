@@ -29,7 +29,6 @@ import actions from 'store/actions'
 
 import { HamburgerIcon, ChevronDownIcon, EmailIcon } from '@chakra-ui/icons'
 import Logo from 'assets/logo2.png'
-import Search from 'components/filter/Search'
 import Notifi from './Notifi'
 
 export default function Header() {
@@ -159,7 +158,7 @@ export default function Header() {
           <Spacer />
           {name !== '' ? (
             <>
-              <Button variant='ghost'>
+              <Button colorScheme='orange'>
                 <Link to='/create-room'>Create new room</Link>
               </Button>
               <Menu>

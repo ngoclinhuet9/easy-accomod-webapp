@@ -47,6 +47,16 @@ function LiveRooms() {
         </Button>
       ),
     },
+    {
+      title: 'Remake',
+      dataIndex: '_id',
+      key: '_id',
+      render: (id: string) => (
+        <Button colorScheme='orange' mr='10px'>
+          <Link to={`rooms/${id}/renew`}> EDIT</Link>
+        </Button>
+      ),
+    },
   ]
   const [pendingRoom, setpendingRoom] = useState<any>([])
   useEffect(() => {

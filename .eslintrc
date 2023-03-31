@@ -22,6 +22,8 @@
     "max-classes-per-file": 0,
     "object-curly-newline": 0,
     "object-curly-spacing": 0,
+    "eol-last": 0,
+    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
     "indent": 0,
     "semi": 0,
     "quotes": 0,

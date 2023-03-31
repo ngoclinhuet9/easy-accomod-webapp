@@ -22,19 +22,18 @@ const Actions = ({
         .put(`rooms/${params?.room_id}/approve`)
         .then((res) => {
           console.log(res)
-          debugger
         })
         .catch((err) => {
           console.log(err)
         })
-      await firestore.collection('notifications').add({
-        sender: '',
-        senderType: 'admin',
-        receiver: ownerId,
-        receiverType: 'owner',
-        roomId,
-        type: 'APPROVE_ROOM',
-      })
+      // firestore().collection('notifications').add({
+      //   sender: '',
+      //   senderType: 'admin',
+      //   receiver: ownerId,
+      //   receiverType: 'owner',
+      //   roomId,
+      //   type: 'APPROVE_ROOM',
+      // })
       history.push('/')
     } catch (error) {
       console.log(error)
@@ -51,14 +50,14 @@ const Actions = ({
         .catch((err) => {
           console.log(err)
         })
-      await firestore.collection('notifications').add({
-        sender: '',
-        senderType: 'admin',
-        receiver: ownerId,
-        receiverType: 'owner',
-        roomId,
-        type: 'REJECT_ROOM',
-      })
+      // firestore().collection('notifications').add({
+      //   sender: '',
+      //   senderType: 'admin',
+      //   receiver: ownerId,
+      //   receiverType: 'owner',
+      //   roomId,
+      //   type: 'REJECT_ROOM',
+      // })
       history.push('/')
     } catch (error) {
       console.log(error)

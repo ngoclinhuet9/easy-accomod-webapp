@@ -96,14 +96,14 @@ const PlaceImage = ({
   }: {
     file: any
     onSuccess: Function
-  }) => {
+  }): void => {
     const name = Date.now().toString()
-    storage
+    storage()
       .ref('images')
       .child(name)
       .put(file)
       .then(() => {
-        storage
+        storage()
           .ref('images')
           .child(name)
           .getDownloadURL()
@@ -136,7 +136,7 @@ const PlaceImage = ({
           <FormControl id='overview_image' isRequired mb={5}>
             <FormLabel>Ảnh chỗ nghỉ (Ít nhất 8 ảnh):</FormLabel>
             <Upload
-              customRequest={customRequest}
+              // customRequest={customRequest}
               action='localhost:3000'
               listType='picture-card'
               fileList={fileList}

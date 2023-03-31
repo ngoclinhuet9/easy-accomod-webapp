@@ -28,7 +28,6 @@ import actions from 'store/actions'
 
 import { HamburgerIcon, ChevronDownIcon } from '@chakra-ui/icons'
 import Logo from 'assets/logo2.png'
-import Search from 'components/filter/Search'
 
 export default function Header() {
   const toast = useToast()
@@ -134,7 +133,6 @@ export default function Header() {
           <Link to='/'>
             <Image src={Logo} width='60px' height='60px' />
           </Link>
-          <Search />
           <Spacer />
           {name !== '' ? (
             <>

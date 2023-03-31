@@ -15,31 +15,31 @@ function Notifi({ role }: { role: string }): any {
     axios.get('/profile').then(async (res) => {
       const dataTemp = res.data.data as any
       console.log(dataTemp)
-      await firestore.collection('notifications').where('receiver', '==', dataTemp?._id).onSnapshot(async (documentSnapshot) => {
-        let notifications = [] as Array<Notification>
-        await documentSnapshot.forEach(async (doc) => {
-          const room = await axios.get(`/rooms/${doc.data().roomId}`)
-          notifications.push({
-            roomName: room.data.data.room?.name,
-            roomId: doc.data().roomId,
-            type: doc.data().type
-          })
-          // await setData([...data, {
-          //   roomName: room.data.data.room?.name,
-          //   roomId: doc.data().roomId,
-          //   type: doc.data().type
-          // }])
-          console.log(data)
-          debugger
-          // await setData([...data, {
-          //   roomName: room.data.data.room?.name,
-          //   roomId: doc.data().roomId,
-          //   type: doc.data().type
-          // }])
-        })
-        setData(notifications)
-        debugger
-      })
+      // await firestore().collection('notifications').where('receiver', '==', dataTemp?._id).onSnapshot(async (documentSnapshot) => {
+      //   let notifications = [] as Array<Notification>
+      //   await documentSnapshot.forEach(async (doc) => {
+      //     const room = await axios.get(`/rooms/${doc.data().roomId}`)
+      //     notifications.push({
+      //       roomName: room.data.data.room?.name,
+      //       roomId: doc.data().roomId,
+      //       type: doc.data().type
+      //     })
+      //     // await setData([...data, {
+      //     //   roomName: room.data.data.room?.name,
+      //     //   roomId: doc.data().roomId,
+      //     //   type: doc.data().type
+      //     // }])
+      //     console.log(data)
+      //     debugger
+      //     // await setData([...data, {
+      //     //   roomName: room.data.data.room?.name,
+      //     //   roomId: doc.data().roomId,
+      //     //   type: doc.data().type
+      //     // }])
+      //   })
+      //   setData(notifications)
+      //   debugger
+      // })
     })
   }
   useEffect(() => {

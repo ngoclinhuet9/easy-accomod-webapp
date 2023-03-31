@@ -1,4 +1,11 @@
-import { Container, Box, Flex, chakra, useToast } from '@chakra-ui/react'
+import {
+  Container,
+  Box,
+  Flex,
+  chakra,
+  useToast,
+  Button,
+} from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-scroll'
 import axios from 'utils/axios'
@@ -172,7 +179,10 @@ const PlaceDetailsComponent = () => {
                   <Location />
                 </Box>
               </Box>
-              <Box flex='1'>
+              <Box>
+                <Button>Đặt phòng</Button>
+              </Box>
+              <Box flex='2'>
                 {token ? (
                   <ShareAndLikeBtn
                     roomId={details?._id}
