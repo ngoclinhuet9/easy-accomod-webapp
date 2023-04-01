@@ -42,7 +42,6 @@ const PlaceImage = ({
   useEffect(() => {
     const temp: Array<any> = []
     if (imageData) {
-      debugger
       imageData?.forEach((image: string) => {
         temp.push({
           url: image,
@@ -75,12 +74,19 @@ const PlaceImage = ({
   }
 
   const handleChange = ({ fileList }: { fileList: Array<any> }) => {
+    console.log(fileList)
     setFileList(fileList)
     const images: Array<string> = []
-    fileList.forEach((file: any) => {
-      images.push(file.response)
+    // fileList.map((file: any) => {
+    //   console.log(file.response)
+    // })
+    fileList.forEach((file) => {
+      if (file.response) {
+        file.url = file.response.url
+        images.push(file.response)
+      }
     })
-    syncData(images)
+    syncData(fileList)
     console.log(images)
   }
 

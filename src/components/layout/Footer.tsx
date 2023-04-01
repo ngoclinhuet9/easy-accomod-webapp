@@ -76,9 +76,6 @@ export default function Footer() {
                   +84 962605699
                 </Text>
                 <Text fontSize='md' mt={2}>
-                  toandeptrai
-                </Text>
-                <Text fontSize='md' mt={2}>
                   Thông tin dành cho chủ nhà
                 </Text>
                 <Text fontSize='md' mt={2}>

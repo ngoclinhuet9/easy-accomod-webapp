@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import Search from 'components/filter/Search'
 import RoomList from 'components/roomlist/RoomList'
 import Layout from 'layouts/Layout'
 import axios from 'utils/axios'
-import { useParams } from 'react-router-dom'
-import { Text } from '@chakra-ui/react'
+import { useHistory, useParams } from 'react-router-dom'
+import { Text, Box } from '@chakra-ui/react'
 
 type Params = {
   city: string
@@ -12,6 +13,7 @@ type Params = {
 const City = () => {
   const [roomList, setRoomList] = useState([])
   const params: Params = useParams()
+  const history = useHistory()
   const cities = {
     hanoi: 'Hà Nội',
     hcm: 'Hồ Chí Minh',
@@ -24,7 +26,7 @@ const City = () => {
   } as any
   useEffect(() => {
     axios
-      .get(`/rooms/city/${params?.city}`)
+      .get('/rooms', { params: history.location.state })
       .then((res) => {
         setRoomList(res.data.data)
       })
@@ -34,8 +36,9 @@ const City = () => {
   }, [params?.city])
   return (
     <Layout title={cities[params?.city]}>
-      <Text fontSize='28px' fontWeight='semibold' mx={22} mt={5}>
-        {`${cities[params?.city]} - ${roomList?.length} phòng`}
+      <Search params={history.location.state} />
+      <Text fontSize='28px' fontWeight='semibold' mx={22} mt={5} ml='125px'>
+        {`Kết quả search- ${roomList?.length} phòng`}
       </Text>
       <RoomList roomList={roomList} />
     </Layout>

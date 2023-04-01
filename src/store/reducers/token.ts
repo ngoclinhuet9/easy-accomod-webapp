@@ -7,7 +7,6 @@ const initialState = ''
 
 const token = createReducer(initialState, {
   [authSuccess.type]: (state, action) => {
-    debugger
     return action.payload
   },
 })

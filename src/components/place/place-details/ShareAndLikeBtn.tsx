@@ -18,7 +18,6 @@ const ShareAndLikeBtn = ({
 
   const handleSubmit = () => {
     if (!bookmarked) {
-      debugger
       axios.post('/bookmarks/create', { roomId }).then((res) => {
         console.log(res)
       }).catch((err) => {
@@ -26,7 +25,6 @@ const ShareAndLikeBtn = ({
       })
       setBookmarked(true)
     } else {
-      debugger
       axios.put('/bookmarks/delete', { roomId }).then((res) => {
         console.log(res)
       })
@@ -34,8 +32,8 @@ const ShareAndLikeBtn = ({
     }
   }
   return (
-    <Box padding='1.5rem 0'>
-      <Flex flexDirection='row' justifyContent='flex-end'>
+    <Box>
+      <Flex flexDirection='row'>
         <Button
           onClick={handleSubmit}
           outline='0'

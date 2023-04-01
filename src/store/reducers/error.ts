@@ -9,7 +9,6 @@ const initialState = {
 
 const auth = createReducer(initialState, {
   [pushError.type]: (state, action) => {
-    debugger
     return { isError: true, error: action.payload }
   },
   [popError.type]: () => {

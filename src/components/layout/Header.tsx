@@ -42,7 +42,6 @@ export default function Header() {
       axios.get('/profile').then((result) => {
         const { data } = result.data
         setName(data.name)
-        debugger
       })
     } catch (error) {
       if (error.response.status === 403) {
@@ -55,7 +54,6 @@ export default function Header() {
           isClosable: true,
           position: 'top',
         })
-        debugger
       }
     }
     // })

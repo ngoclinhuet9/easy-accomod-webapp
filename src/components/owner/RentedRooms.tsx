@@ -88,7 +88,6 @@ function RentedRooms() {
           isClosable: true,
           position: 'top',
         })
-        debugger
       })
       .catch((err) => {
         console.log(err)

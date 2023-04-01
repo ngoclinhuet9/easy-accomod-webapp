@@ -45,7 +45,6 @@ const Actions = ({
         .put(`rooms/${params?.room_id}/reject`)
         .then((res) => {
           console.log(res)
-          debugger
         })
         .catch((err) => {
           console.log(err)

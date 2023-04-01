@@ -87,6 +87,10 @@ const PlaceDetailsComponent = () => {
     }
   }, [])
 
+  const backToScreen = () => {
+    window.location.hostname = 'localhost'
+  }
+
   const navLabels = [
     { label: 'Tổng quan', to: 'overview' },
     { label: 'Tiện nghi', to: 'amenities' },
@@ -179,22 +183,32 @@ const PlaceDetailsComponent = () => {
                   <Location />
                 </Box>
               </Box>
-              <Box>
-                <Button>Đặt phòng</Button>
-              </Box>
-              <Box flex='2'>
-                {token ? (
-                  <ShareAndLikeBtn
-                    roomId={details?._id}
-                    isBookmarked={isBookmarked}
+              <Box padding='1.5rem 0' flex='2'>
+                <Flex width='100%' flexDirection='row'>
+                  <Box>
+                    <Button onClick={backToScreen} variant='link'>
+                      Trở về
+                    </Button>
+                  </Box>
+                  <Box ml='16px'>
+                    <Button colorScheme='orange'>Đặt phòng</Button>
+                  </Box>
+                  <Box ml='5px'>
+                    {token ? (
+                      <ShareAndLikeBtn
+                        roomId={details?._id}
+                        isBookmarked={isBookmarked}
+                      />
+                    ) : null}
+                  </Box>
+                </Flex>
+                <Box>
+                  <BookingForm
+                    roomPrice={details?.roomPrice}
+                    waterPrice={details?.waterPrice}
+                    electricityPrice={details?.electricityPrice}
                   />
-                ) : null}
-
-                <BookingForm
-                  roomPrice={details?.roomPrice}
-                  waterPrice={details?.waterPrice}
-                  electricityPrice={details?.electricityPrice}
-                />
+                </Box>
               </Box>
             </Flex>
           </Box>

@@ -76,7 +76,6 @@ function PendingOwner() {
       .put(`owners/${id}/approve`)
       .then((res) => {
         console.log(res)
-        debugger
       })
       .catch((err) => {
         console.log(err)
@@ -89,7 +88,6 @@ function PendingOwner() {
       .put(`owners/${id}/reject`)
       .then((res) => {
         console.log(res)
-        debugger
       })
       .catch((err) => {
         console.log(err)

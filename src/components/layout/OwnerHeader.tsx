@@ -45,7 +45,6 @@ export default function Header() {
       axios.get('/profile').then((result) => {
         const { data } = result.data
         setName(data.name)
-        debugger
         if (data.status !== 'APPROVED') {
           signOut()
           toast({
@@ -57,7 +56,6 @@ export default function Header() {
             position: 'top',
           })
         }
-        debugger
       })
     } catch (error) {
       if (error.response?.status === 403) {

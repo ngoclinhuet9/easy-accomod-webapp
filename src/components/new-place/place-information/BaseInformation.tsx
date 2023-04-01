@@ -36,7 +36,6 @@ const BaseInformation = ({
     if (data) {
       setPlaceName(data.name)
       setRoomType(data.roomType)
-      debugger
     }
   }, [data])
 

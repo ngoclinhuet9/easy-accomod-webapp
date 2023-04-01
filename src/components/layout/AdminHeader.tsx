@@ -44,7 +44,6 @@ export default function AdminHeader() {
       axios.get('/profile').then((result) => {
         const { data } = result.data
         setName(data.name)
-        debugger
       })
     } catch (error) {
       if (error.response?.status === 403 || 401) {

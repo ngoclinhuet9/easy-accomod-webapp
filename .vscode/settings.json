@@ -6,5 +6,7 @@
     "reduxjs",
     "signin",
     "signup"
-  ]
+  ], 
+  "editor.codeActionsOnSave": { "source.fixAll": true },
+  "editor.formatOnSave": false
 }

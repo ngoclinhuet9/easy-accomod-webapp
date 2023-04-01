@@ -27,7 +27,6 @@ function* logInByEmailAndPasswordSaga({
       })
     const token = yield auth?.currentUser?.getIdToken(true)
     localStorage.setItem('token', token)
-    debugger
     if (token) {
       yield put(authSuccess(token))
     }
@@ -54,7 +53,6 @@ function* signUpByEmailAndPasswordSaga({
       })
     const token = yield auth?.currentUser?.getIdToken(true)
     localStorage.setItem('token', token)
-    debugger
     if (token) {
       yield put(authSuccess(token))
       const domain = window.location.hostname.split('.')
@@ -66,7 +64,6 @@ function* signUpByEmailAndPasswordSaga({
       }
       if (domain.length === 2) {
         if (domain[0] === 'owner') {
-          debugger
           yield axios.post('/owners/create', {
             email: payload.email,
             name: payload.name,
@@ -76,8 +73,6 @@ function* signUpByEmailAndPasswordSaga({
           })
         }
       }
-
-      debugger
     }
   } catch (e) {
     console.log(e)

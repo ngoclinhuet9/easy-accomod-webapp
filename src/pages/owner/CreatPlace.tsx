@@ -41,7 +41,6 @@ const CreatePlace = ({ data, status }: { data?: any; status: string }) => {
   })
   useEffect(() => {
     if (data) {
-      debugger
       setPlaceInfo(data)
       setPlaceImage(data.images)
       setPlacePolicy(data)
@@ -161,7 +160,6 @@ const CreatePlace = ({ data, status }: { data?: any; status: string }) => {
         }
       } catch (error) {
         console.log(error)
-        debugger
         toast({
           title: 'Sai định dạng dữ liệu',
           description: error?.response?.message,

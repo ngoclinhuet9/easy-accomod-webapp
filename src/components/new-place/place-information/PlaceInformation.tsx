@@ -72,7 +72,6 @@ const PlaceInformation = ({
       setHasFridge(data.hasFridge)
       setHasBed(data.hasBed)
       setHasWardrobe(data.hasWardrobe)
-      debugger
     }
   }, [data])
   useEffect(() => {
