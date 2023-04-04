@@ -26,7 +26,7 @@ const City = () => {
       .catch((err) => {
         console.log(err)
       })
-  }, [params?.city])
+  }, [params?.city, history.location.state])
   return (
     <Layout>
       <Search data={history.location.state} />

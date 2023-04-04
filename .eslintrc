@@ -85,22 +85,7 @@
         ]
       }
     ],
-    "prettier/prettier": [
-      "error",
-      {
-        "trailingComma": "es5",
-        "singleQuote": true,
-        "printWidth": 80,
-        "tabWidth": 2,
-        "jsxSingleQuote": true,
-        "semi": false,
-        "eslintIntegration": true,
-        "jsxBracketSameLine": true,
-        "bracketSpacing": true,
-        "proseWrap": "always",
-        "endOfLine": "auto"
-      }
-    ],
+    "prettier/prettier": 0,
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-props-no-spreading": 0,

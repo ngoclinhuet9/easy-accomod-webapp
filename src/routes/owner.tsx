@@ -19,6 +19,9 @@ export default function OwnerRouter() {
       <Route path='/signup' component={Signup} />
       <Route path='/create-room' component={CreatPlace} />
       <Route path='/rooms/:room_id/preview' component={PreviewRoom} />
+      <Route path='/rooms/:room_id/rent_preview' component={PreviewRoom} />
+      <Route path='/rooms/:room_id/live_room' component={PreviewRoom} />
+      <Route path='/rooms/:room_id/pending' component={PreviewRoom} />
       <Route path='/rooms/:room_id/view' component={ViewRoom} />
       <Route path='/rooms/:room_id/renew' component={RenewRoom} />
       <Route path='/rooms/:room_id/edit' component={EditRoom} />

@@ -140,7 +140,7 @@ const PlaceImage = ({
             </Text>
           </Box>
           <FormControl id='overview_image' isRequired mb={5}>
-            <FormLabel>Ảnh chỗ nghỉ (Ít nhất 8 ảnh):</FormLabel>
+            <FormLabel>Ảnh chỗ nghỉ (Ít nhất 1 ảnh):</FormLabel>
             <Upload
               // customRequest={customRequest}
               action='localhost:3000'

@@ -44,7 +44,7 @@ function LiveRooms() {
       render: (id: string) => (
         <Box>
           <Button colorScheme='orange' mr='10px'>
-            <Link to={`/rooms/${id}/preview`}>Xem</Link>
+            <Link to={`/rooms/${id}/live_room`}>Xem</Link>
           </Button>
           <Button colorScheme='orange' mr='5px'>
             <Link to={`/rooms/${id}/edit`}>Edit</Link>

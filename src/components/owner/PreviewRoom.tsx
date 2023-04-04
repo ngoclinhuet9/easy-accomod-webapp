@@ -2,7 +2,7 @@ import { Container, Box, Flex, chakra, useToast } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-scroll'
 import axios from 'utils/axios'
-import { useParams } from 'react-router-dom'
+import { useParams, useRouteMatch } from 'react-router-dom'
 
 import ImageSlider from 'components/place/place-details/ImageSlider'
 import Amenities from 'components/place/place-details/Amenities'
@@ -30,6 +30,7 @@ type Intro = {
   roomPrice: number
   waterPrice: number
   electricityPrice: number
+  status: string
   images: Array<string>
   owner: { name: string; _id: string }
   description: string
@@ -40,7 +41,7 @@ type Params = {
 }
 
 const PlaceDetailsComponent = () => {
-  const toast = useToast()
+  const router = useRouteMatch()
   const params: Params = useParams()
   const Nav = chakra('nav')
   // const NavItem = chakra(Link)
@@ -48,6 +49,7 @@ const PlaceDetailsComponent = () => {
 
   const [showStickyNavBar, setShowStickyNavBar] = useState(false)
   const [details, setDetails] = useState<Intro>()
+  const [payFlag, setPayFlag] = useState(false)
   const handleScroll = () => {
     const position = window.pageYOffset
     if (position >= 650) {
@@ -57,16 +59,28 @@ const PlaceDetailsComponent = () => {
     }
   }
   useEffect(() => {
-    axios
-      .get(`/rooms/${params?.room_id}`)
-      .then((res) => {
-        // debugger
-        setDetails(res.data.data.room)
-        console.log(res.data.data.room)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    if (router.url.includes('rent_preview')) {
+      axios
+        .get(`/owner/rooms/rent/${params?.room_id}`)
+        .then((res) => {
+          setDetails(res.data.data.room)
+          console.log(res.data.data.payFlag, '....')
+          setPayFlag(res.data.data.payFlag)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    } else {
+      axios
+        .get(`/rooms/${params?.room_id}`)
+        .then((res) => {
+          setDetails(res.data.data.room)
+          console.log(res.data.data.room)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   }, [])
 
   useEffect(() => {
@@ -168,7 +182,9 @@ const PlaceDetailsComponent = () => {
               </Box>
 
               <Box flex='1'>
-                <Actions />
+                {details && (
+                  <Actions isPay={payFlag} status={details?.status} />
+                )}
                 <BookingForm
                   roomPrice={details?.roomPrice}
                   waterPrice={details?.waterPrice}

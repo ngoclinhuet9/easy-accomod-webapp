@@ -59,7 +59,7 @@ const CreatePlace = ({ data, status }: { data?: any; status: string }) => {
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
-    if (placeImage?.length >= 3) {
+    if (placeImage?.length >= 1) {
       setIsCompletePlaceImage(true)
     }
   }, [placeImage])
@@ -108,7 +108,15 @@ const CreatePlace = ({ data, status }: { data?: any; status: string }) => {
           const res = await axios({
             url: `/rooms/${params?.room_id}/update`,
             method: 'put',
-            data: { ...placeInfo, images: placeImage, ...placePolicy },
+            data: {
+              ...placeInfo,
+              images: [
+                'https://firebasestorage.googleapis.com/v0/b/easy-accomod-57b04.appspot.com/o/images%2F1609229710619?alt=media&token=d37c42f4-e0de-4bcd-8fbd-7bf7c3d3fe4e',
+                'https://firebasestorage.googleapis.com/v0/b/easy-accomod-57b04.appspot.com/o/images%2F1609229701652?alt=media&token=29dccb44-c7b0-4566-8640-d870521b7869',
+                'https://firebasestorage.googleapis.com/v0/b/easy-accomod-57b04.appspot.com/o/images%2F1609229790195?alt=media&token=bcc1be89-2a32-4e3f-bd8a-ed87b4a9896f',
+              ],
+              ...placePolicy,
+            },
           })
           if (res) {
             toast({
@@ -120,7 +128,6 @@ const CreatePlace = ({ data, status }: { data?: any; status: string }) => {
               position: 'top',
             })
             history.push(`/rooms/${params?.room_id}/preview`)
-            console.log(res.data.data.owner)
             // await firestore.collection('notifications').add({
             //   sender: res.data.data.owner,
             //   senderType: 'owner',
@@ -134,7 +141,15 @@ const CreatePlace = ({ data, status }: { data?: any; status: string }) => {
           const res = await axios({
             url: `/rooms/create`,
             method: 'post',
-            data: { ...placeInfo, images: placeImage, ...placePolicy },
+            data: {
+              ...placeInfo,
+              images: [
+                'https://firebasestorage.googleapis.com/v0/b/easy-accomod-57b04.appspot.com/o/images%2F1609229710619?alt=media&token=d37c42f4-e0de-4bcd-8fbd-7bf7c3d3fe4e',
+                'https://firebasestorage.googleapis.com/v0/b/easy-accomod-57b04.appspot.com/o/images%2F1609229701652?alt=media&token=29dccb44-c7b0-4566-8640-d870521b7869',
+                'https://firebasestorage.googleapis.com/v0/b/easy-accomod-57b04.appspot.com/o/images%2F1609229790195?alt=media&token=bcc1be89-2a32-4e3f-bd8a-ed87b4a9896f',
+              ],
+              ...placePolicy,
+            },
           })
           if (res) {
             toast({

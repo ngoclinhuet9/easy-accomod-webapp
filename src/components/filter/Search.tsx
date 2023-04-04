@@ -19,13 +19,16 @@ function Search(data: any) {
   const [price, setPrice] = useState(data?.price)
   const [roomType, setRoomType] = useState(data?.roomType)
   const history = useHistory()
-    //  const city = cityRef.current?.getCityState()
-    //  const price = priceRef.current?.getPriceState()
-    //  const roomType = typeRoomRef.current?.getTypeRoomState()
+  console.log(history, '=====history')
+  useEffect(() => {
+    const params: any = history.location.state;
+    if (params) {
+      setCity(params?.city);
+      setPrice(`${params.minPrice} and ${params?.maxPrice}`);
+      setRoomType(params?.roomType);
+    }
+  }, [history.location.state])
     const onSearch = () => {
-      // const city = cityRef.current?.getCityState()
-      // const price = priceRef.current?.getPriceState()
-      // const roomType = typeRoomRef.current?.getTypeRoomState()
       let minPrice = ''
       let maxPrice = ''
       if (price) {
@@ -44,7 +47,7 @@ function Search(data: any) {
       setRoomType('')
     }
 
-return (
+  return (
     <Box
         height='85px'
         w='100%'

@@ -47,11 +47,11 @@ function RentedRooms() {
     },
     {
       title: 'Action',
-      dataIndex: 'roomId',
-      key: 'roomId',
+      dataIndex: 'renterRoomID',
+      key: 'renterRoomID',
       render: (id: any) => (
         <Button colorScheme='orange' mr='10px'>
-          <Link to={`/rooms/${id}/preview/${payFlag}`}>Xem</Link>
+          <Link to={`/rooms/${id}/rent_preview`}>Xem</Link>
         </Button>
       ),
     },
@@ -68,7 +68,7 @@ function RentedRooms() {
             renterName: item.renter.name,
             renterPhone: item.renter.phone,
             renterEmail: item.renter.email,
-            roomId: item.room._id,
+            renterRoomID: item._id,
             payFlag: item.payFlag,
             status: item.payFlag ? 'Đã thanh toán' : 'Chưa thanh toán',
           })
