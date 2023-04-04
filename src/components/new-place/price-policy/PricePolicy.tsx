@@ -63,7 +63,7 @@ const PricePolicy = ({ completeStep, syncData, data }: { completeStep: Function;
           </Box>
           <FormControl id='normal_day_price' isRequired mb={5} mr={5}>
             <FormLabel>Giá phòng 1 tháng: </FormLabel>
-            <NumberInput step={500000} defaultValue={1000000} min={0} max={10000000} onChange={(value) => setRoomPrice(parseInt(value))} value={roomPrice}>
+            <NumberInput step={500000} defaultValue={1000000} min={0} max={100000000} onChange={(value) => setRoomPrice(parseInt(value))} value={roomPrice}>
               <NumberInputField />
               <NumberInputStepper>
                 <NumberIncrementStepper />
@@ -73,7 +73,7 @@ const PricePolicy = ({ completeStep, syncData, data }: { completeStep: Function;
           </FormControl>
           <FormControl id='weekend_price' isRequired mb={5} mr={5}>
             <FormLabel>Giá điện trên 1 kWh: </FormLabel>
-            <NumberInput step={1000} defaultValue={5000} min={0} max={10000000} onChange={(value) => setWaterPrice(parseInt(value))} value={waterPrice}>
+            <NumberInput step={500} defaultValue={5000} min={0} max={1000000} onChange={(value) => setWaterPrice(parseInt(value))} value={waterPrice}>
               <NumberInputField />
               <NumberInputStepper>
                 <NumberIncrementStepper />

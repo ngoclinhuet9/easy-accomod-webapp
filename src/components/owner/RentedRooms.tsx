@@ -2,7 +2,7 @@
 import { Table } from 'antd'
 import { Button, useToast } from '@chakra-ui/react'
 import { Link, useParams } from 'react-router-dom'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import axios from 'utils/axios'
 
 import 'antd/dist/antd.css'
@@ -13,94 +13,101 @@ type Params = {
 function RentedRooms() {
   const toast = useToast()
   const params: Params = useParams()
+  const [payFlag, setPayFlag] = useState(false)
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
+      title: 'Tên Phòng',
+      dataIndex: 'roomName',
+      key: 'roomName',
       render: (text: string) => <a>{text}</a>,
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
+      title: 'Người Thuê',
+      dataIndex: 'renterName',
+      key: 'renterName',
       render: (text: string) => <a>{text}</a>,
     },
     {
-      title: 'Room Type',
-      dataIndex: 'roomType',
-      key: 'roomType',
+      title: 'Phone',
+      dataIndex: 'renterPhone',
+      key: 'renterPhone',
+      render: (text: number) => <a>{text}</a>,
+    },
+    {
+      title: 'Email',
+      dataIndex: 'renterEmail',
+      key: 'renterEmail',
       render: (text: string) => <a>{text}</a>,
     },
     {
-      title: 'Price',
-      dataIndex: 'roomPrice',
-      key: 'roomPrice',
-    },
-    {
-      title: 'Area',
-      dataIndex: 'area',
-      key: 'area',
+      title: 'Trạng thái',
+      dataIndex: 'status',
+      key: 'status',
+      render: (text: string) => <a>{text}</a>,
     },
     {
       title: 'Action',
-      dataIndex: '_id',
-      key: '_id',
-      render: (id: string) => (
+      dataIndex: 'roomId',
+      key: 'roomId',
+      render: (id: any) => (
         <Button colorScheme='orange' mr='10px'>
-          <Link to={`/rooms/${id}/preview`}>Xem</Link>
-        </Button>
-      ),
-    },
-    {
-      title: 'Remake',
-      dataIndex: '_id',
-      key: '_id',
-      render: (id: string) => (
-        <Button colorScheme='orange' mr='10px'>
-          <Link to={`rooms/${id}/renew`}> ReNew</Link>
+          <Link to={`/rooms/${id}/preview/${payFlag}`}>Xem</Link>
         </Button>
       ),
     },
   ]
-  const [rentRoom, setRentRoom] = useState<any>([])
+  const [rentRoom, setRentRoom] = useState<any[]>([])
   useEffect(() => {
     axios
       .get(`/owner/rooms/rent`)
       .then((res) => {
-        setRentRoom(res.data.data)
+        let result: any[] = []
+        res.data.data.forEach((item: any) => {
+          result.push({
+            roomName: item.room.name,
+            renterName: item.renter.name,
+            renterPhone: item.renter.phone,
+            renterEmail: item.renter.email,
+            roomId: item.room._id,
+            payFlag: item.payFlag,
+            status: item.payFlag ? 'Đã thanh toán' : 'Chưa thanh toán',
+          })
+        })
+
+        setRentRoom(result)
       })
       .catch((err) => {
         console.log(err)
       })
   }, [])
-  const handleRemake = (id: any) => {
-    axios
-      .put(`/owner/rooms/${id}/return`)
-      .then((res) => {
-        console.log(res)
-        setRentRoom(rentRoom.filter((item: any) => item._id !== id))
-        toast({
-          title: 'Thành công',
-          description: 'Bạn đã remake thành công',
-          status: 'success',
-          duration: 3000,
-          isClosable: true,
-          position: 'top',
-        })
-      })
-      .catch((err) => {
-        console.log(err)
-        toast({
-          title: 'Có sự cố xảy ra',
-          description: 'Bạn không đủ quyền để truy cập trang này',
-          status: 'error',
-          duration: 3000,
-          isClosable: true,
-          position: 'top',
-        })
-      })
-  }
+
+  // const handleRemake = (id: any) => {
+  //   axios
+  //     .put(`/owner/rooms/${id}/return`)
+  //     .then((res) => {
+  //       console.log(res)
+  //       setRentRoom(rentRoom.filter((item: any) => item._id !== id))
+  //       toast({
+  //         title: 'Thành công',
+  //         description: 'Bạn đã remake thành công',
+  //         status: 'success',
+  //         duration: 3000,
+  //         isClosable: true,
+  //         position: 'top',
+  //       })
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //       toast({
+  //         title: 'Có sự cố xảy ra',
+  //         description: 'Bạn không đủ quyền để truy cập trang này',
+  //         status: 'error',
+  //         duration: 3000,
+  //         isClosable: true,
+  //         position: 'top',
+  //       })
+  //     })
+  // }
   return <Table columns={columns} dataSource={rentRoom} />
 }
 

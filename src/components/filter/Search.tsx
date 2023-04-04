@@ -8,23 +8,24 @@ import {
   Button,
   Spacer,
   useDisclosure,
-  Image
+  Image,
+  Select
 } from '@chakra-ui/react'
 import axios from 'utils/axios'
-import City from './City'
-import Price from './Price'
-import TypeRoom from './TypeRoom'
 
-function Search({params}:any) {
-  console.log(params)
-  const typeRoomRef = useRef<any>(null);
-  const cityRef = useRef<any>(null);
-  const priceRef = useRef<any>(null);
-    const history = useHistory()
+function Search(data: any) {
+  // let priceValue = {data.minPrice + ' and ' + data.maxPrice
+  const [city, setCity] = useState(data?.city)
+  const [price, setPrice] = useState(data?.price)
+  const [roomType, setRoomType] = useState(data?.roomType)
+  const history = useHistory()
+    //  const city = cityRef.current?.getCityState()
+    //  const price = priceRef.current?.getPriceState()
+    //  const roomType = typeRoomRef.current?.getTypeRoomState()
     const onSearch = () => {
-      const city = cityRef.current?.getCityState()
-      const price = priceRef.current?.getPriceState()
-      const roomType = typeRoomRef.current?.getTypeRoomState()
+      // const city = cityRef.current?.getCityState()
+      // const price = priceRef.current?.getPriceState()
+      // const roomType = typeRoomRef.current?.getTypeRoomState()
       let minPrice = ''
       let maxPrice = ''
       if (price) {
@@ -38,9 +39,9 @@ function Search({params}:any) {
       })
     }
     const onClear = () => {
-      typeRoomRef.current.childFunction1()
-      cityRef.current.childFunction1()
-      priceRef.current.childFunction1()
+      setCity('')
+      setPrice('')
+      setRoomType('')
     }
 
 return (
@@ -60,9 +61,91 @@ return (
           backgroundColor='blue'
           justifyContent='center'
           alignItems='center'>
-          <City ref={cityRef} data={params?.city}/>
-          <Price ref={priceRef} />
-          <TypeRoom ref={typeRoomRef} value={params?.roomType}/>
+          <Box
+            ml={2}
+            w='100%'
+            height='50px'
+            borderRadius='6px'
+            mr='15px'
+            padding='15px 0px'
+            boxShadow='1px 1px 4px rgba(0,0,0,.2)'>
+            <Select
+              alignItems='center'
+              height='100%'
+              width='100%'
+              color='black'
+              background='transparent'
+              border='none'
+              px={2}
+              value={city}
+              placeholder='Chọn thành phố'
+              _placeholder={{ color: 'gray' }}
+              _focus={{ outline: 'none' }}
+              onChange={(event: any) => setCity(event.target.value)}>
+              <option value='hanoi'>Hà Nội</option>
+              <option value='hcm'>Hồ Chí Minh</option>
+              <option value='danang'>Đà Nẵng</option>
+              <option value='dalat'>Đà Lạt</option>
+              <option value='vungtau'>Vũng Tàu</option>
+              <option value='nhatrang'>Nha Trang</option>
+              <option value='hoian'>Hội An</option>
+              <option value='quangninh'>Quảng Ninh</option>
+            </Select>
+          </Box>
+          <Box
+            ml={2}
+            w='100%'
+            height='50px'
+            borderRadius='6px'
+            mr='15px'
+            padding='15px 0px'
+            boxShadow='1px 1px 4px rgba(0,0,0,.2)'>
+            <Select
+              height='100%'
+              width='100%'
+              color='black'
+              background='transparent'
+              border='none'
+              px={2}
+              value={price}
+              placeholder='Chọn khoảng giá'
+              _placeholder={{ color: 'gray' }}
+              _focus={{ outline: 'none' }}
+              onChange={(event) => setPrice(event.target.value)}>
+              <option value='0 and 2000000'>0 - 2.000.000</option>
+              <option value='2000000 and 5000000'>2.000.000 - 5.000.000</option>
+              <option value='5000000 and 10000000'>
+                5.000.000 - 10.000.000
+              </option>
+              <option value='10000000 and '>10.000.000 trở lên</option>
+            </Select>
+          </Box>
+          <Box
+            ml={2}
+            w='100%'
+            height='50px'
+            borderRadius='6px'
+            mr='15px'
+            padding='15px 0px'
+            boxShadow='1px 1px 4px rgba(0,0,0,.2)'>
+            <Select
+              height='100%'
+              width='100%'
+              color='black'
+              background='transparent'
+              border='none'
+              px={2}
+              value={roomType}
+              placeholder='Chọn loại phòng'
+              _placeholder={{ color: 'gray' }}
+              _focus={{ outline: 'none' }}
+              onChange={(event) => setRoomType(event.target.value)}>
+              <option value='MOTEL'>Phòng trọ</option>
+              <option value='APARTMENT'>Chung cư</option>
+              <option value='WHOLE_HOUSE'>Nhà nguyên căn</option>
+              <option value='WHOLE_APARTMENT'>Chung cư nguyên căn</option>
+            </Select>
+          </Box>
           <Box
             h="100%"
             alignItems='center'

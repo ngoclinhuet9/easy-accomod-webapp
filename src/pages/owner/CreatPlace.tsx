@@ -42,7 +42,7 @@ const CreatePlace = ({ data, status }: { data?: any; status: string }) => {
   useEffect(() => {
     if (data) {
       setPlaceInfo(data)
-      setPlaceImage(data.images)
+      // setPlaceImage(data.images)
       setPlacePolicy(data)
     }
   }, [data])

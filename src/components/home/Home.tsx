@@ -106,7 +106,7 @@ const Home = () => {
             <Image src={Banner} />
           </Box>
           <Box>
-            <Search />
+            <Search data={null} />
           </Box>
           <Box>
             <Box mt={8} marginBottom='8px'>

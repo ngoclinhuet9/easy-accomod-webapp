@@ -11,9 +11,10 @@ import PlaceIntro from 'components/place/place-details/PlaceIntro'
 import PlaceRoute from 'components/place/place-details/PlaceRoute'
 import PolicyAndRule from 'components/place/place-details/PolicyAndRule'
 import BookingForm from 'components/place/place-details/BookingForm'
-import Layout from 'layouts/OwnerLayout'
+import Actions from './Action'
 
 type Intro = {
+  _id: string
   name: string
   address: string
   area: number
@@ -30,7 +31,7 @@ type Intro = {
   waterPrice: number
   electricityPrice: number
   images: Array<string>
-  owner: { name: string }
+  owner: { name: string; _id: string }
   description: string
   rule: string
 }
@@ -38,7 +39,7 @@ type Params = {
   room_id: string
 }
 
-const PreviewRoom = () => {
+const PlaceDetailsComponent = () => {
   const toast = useToast()
   const params: Params = useParams()
   const Nav = chakra('nav')
@@ -85,7 +86,7 @@ const PreviewRoom = () => {
   ]
 
   return (
-    <Layout title={details?.name}>
+    <Box>
       <Nav
         padding='1.5rem 0'
         display={showStickyNavBar ? 'flex' : 'none'}
@@ -167,6 +168,7 @@ const PreviewRoom = () => {
               </Box>
 
               <Box flex='1'>
+                <Actions />
                 <BookingForm
                   roomPrice={details?.roomPrice}
                   waterPrice={details?.waterPrice}
@@ -177,8 +179,8 @@ const PreviewRoom = () => {
           </Box>
         </Container>
       </Box>
-    </Layout>
+    </Box>
   )
 }
 
-export default PreviewRoom
+export default PlaceDetailsComponent

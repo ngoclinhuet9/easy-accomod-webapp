@@ -9,12 +9,15 @@ type Params = {
 const Actions = () => {
   const toast = useToast()
   const params: Params = useParams()
-  const [isRent, setIsRent] = useState(false)
+
+  console.log(params, '=========')
+
+  const [payFlag, setPayFlag] = useState(false)
   const handleAccept = (id: any) => {
     axios
       .put(`owner/rooms/${params?.room_id}/rent`)
       .then((res) => {
-        setIsRent(true)
+        setPayFlag(true)
         toast({
           title: 'Thành công',
           description: 'Bạn đã cho thuê thành công',
@@ -40,7 +43,7 @@ const Actions = () => {
   return (
     <Box padding='1.5rem 0'>
       <Flex flexDirection='row' justifyContent='flex-end'>
-        {isRent ? (
+        {payFlag ? (
           <Button
             outline='0'
             fontSize='1.25rem'

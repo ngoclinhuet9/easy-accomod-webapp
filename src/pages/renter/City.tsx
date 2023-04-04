@@ -8,22 +8,15 @@ import { Text, Box } from '@chakra-ui/react'
 
 type Params = {
   city: string
+  roomType: string
+  minPrice: string
+  maxPrice: string
 }
 
 const City = () => {
   const [roomList, setRoomList] = useState([])
   const params: Params = useParams()
   const history = useHistory()
-  const cities = {
-    hanoi: 'Hà Nội',
-    hcm: 'Hồ Chí Minh',
-    nhatrang: 'Nha Trang',
-    dalat: 'Đà Lạt',
-    danang: 'Đà Nẵng',
-    vungtau: 'Vũng Tàu',
-    hoian: 'Hội An',
-    quangninh: 'Quảng Ninh',
-  } as any
   useEffect(() => {
     axios
       .get('/rooms', { params: history.location.state })
@@ -35,8 +28,8 @@ const City = () => {
       })
   }, [params?.city])
   return (
-    <Layout title={cities[params?.city]}>
-      <Search params={history.location.state} />
+    <Layout>
+      <Search data={history.location.state} />
       <Text fontSize='28px' fontWeight='semibold' mx={22} mt={5} ml='125px'>
         {`Kết quả search- ${roomList?.length} phòng`}
       </Text>

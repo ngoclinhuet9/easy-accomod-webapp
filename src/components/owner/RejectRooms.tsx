@@ -46,7 +46,7 @@ function RejectRooms() {
             <Link to={`/rooms/${id}/preview`}>Xem</Link>
           </Button>
           <Button colorScheme='orange'>
-            <Link to={`rooms/${id}/renew`}> EDIT</Link>
+            <Link to={`rooms/${id}/edit`}> Edit</Link>
           </Button>
         </Box>
       ),

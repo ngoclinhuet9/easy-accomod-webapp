@@ -5,11 +5,29 @@ import {
   chakra,
   useToast,
   Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  FormControl,
+  FormLabel,
+  Input,
 } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-scroll'
 import axios from 'utils/axios'
-import { useParams } from 'react-router-dom'
+import { Link as ReactLink, useHistory, useParams } from 'react-router-dom'
+import Header from 'components/layout/Header'
+import { DatePicker, DatePickerProps } from 'antd'
+import moment from 'moment'
+import dayjs from 'dayjs'
+import 'dayjs/locale/zh-cn'
+import useRedux from 'hooks/useRedux'
+import actions from 'store/actions'
 import Amenities from './Amenities'
 import ImageSlider from './ImageSlider'
 import Location from './Location'
@@ -48,16 +66,21 @@ type Params = {
 }
 
 const PlaceDetailsComponent = () => {
+  let date = new Date()
   const token = localStorage.getItem('token')
   const toast = useToast()
   const params: Params = useParams()
   const Nav = chakra('nav')
   const NavItem = chakra(Link)
-
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const [showStickyNavBar, setShowStickyNavBar] = useState(false)
+  const [inputDisable] = useState(true)
   const [details, setDetails] = useState<Intro>()
   const [isBookmarked, setIsBookmarked] = useState(true)
   const [reviews, setReviews] = useState([])
+  const [startDate, setStartDate] = useState(date.toString())
+  const [endDate, setEndDate] = useState(date.toString())
+  const history = useHistory()
   const handleScroll = () => {
     const position = window.pageYOffset
     if (position >= 650) {
@@ -66,6 +89,54 @@ const PlaceDetailsComponent = () => {
       setShowStickyNavBar(false)
     }
   }
+  const next = async () => {
+    if (startDate <= endDate) {
+      try {
+        const res = await axios({
+          url: `/rooms/${params?.room_id}/booking`,
+          method: 'post',
+          data: {
+            _startDate: startDate,
+            _endDate: endDate,
+          },
+        })
+        console.log(res)
+        if (res) {
+          toast({
+            title: 'Thành công',
+            description: 'Bạn đã gửi yêu cầu đặt phòng thành công',
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+            position: 'top',
+          })
+        }
+        history.push('/')
+      } catch (error) {
+        toast({
+          title: 'Sai định dạng dữ liệu',
+          description: error?.response?.message,
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+          position: 'top',
+        })
+      }
+    } else {
+      console.log(startDate)
+      console.log(endDate)
+      toast({
+        title: 'Ngày kết thúc cần lớn hơn ngày bắt đầu',
+        description: 'Vui lòng điền vào những trường yêu cầu',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position: 'top',
+      })
+    }
+  }
+  const initialRef = useRef(null)
+  const finalRef = useRef(null)
   useEffect(() => {
     axios
       .get(`/rooms/${params?.room_id}`)
@@ -120,7 +191,7 @@ const PlaceDetailsComponent = () => {
           flexDirection='row'
           display='flex'
           justifyContent='space-between'>
-          <Box>
+          <Box ref={initialRef}>
             {navLabels.map(({ label, to }) => (
               <NavItem
                 key={to}
@@ -191,7 +262,63 @@ const PlaceDetailsComponent = () => {
                     </Button>
                   </Box>
                   <Box ml='16px'>
-                    <Button colorScheme='orange'>Đặt phòng</Button>
+                    <Button colorScheme='orange' onClick={onOpen}>
+                      Đặt phòng
+                    </Button>
+                    <Modal
+                      initialFocusRef={initialRef}
+                      finalFocusRef={finalRef}
+                      isOpen={isOpen}
+                      onClose={onClose}
+                      z-index='1'>
+                      <ModalOverlay />
+                      <ModalContent>
+                        <ModalHeader>Đặt phòng</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody pb={6}>
+                          <FormControl mt={4}>
+                            <FormLabel>Số tiền cần đặt cọc</FormLabel>
+                            <Input
+                              isDisabled={inputDisable}
+                              placeholder='6000'
+                            />
+                          </FormControl>
+                          <FormControl>
+                            <FormLabel>Thời gian thuê</FormLabel>
+                            <DatePicker
+                              defaultValue={moment(date, 'YYYY/MM/DD')}
+                              format='YYYY/MM/DD'
+                              onSelect={(event: any) => {
+                                setStartDate(
+                                  dayjs(event._d).format('YYYY/MM/DD')
+                                )
+                              }}
+                              id='startDate'
+                            />
+                            <text> ~ </text>
+                            <DatePicker
+                              defaultValue={moment(date, 'YYYY/MM/DD')}
+                              format='YYYY/MM/DD'
+                              onSelect={(event: any) => {
+                                setEndDate(dayjs(event._d).format('YYYY/MM/DD'))
+                              }}
+                              id='endDate'
+                            />
+                          </FormControl>
+                        </ModalBody>
+                        <ModalFooter>
+                          <Button
+                            colorScheme='orange'
+                            mb='15px'
+                            onClick={() => next()}>
+                            Thanh toán sau
+                          </Button>
+                          <Button colorScheme='orange' mr='80px' mb='15px'>
+                            Thanh toán ngay
+                          </Button>
+                        </ModalFooter>
+                      </ModalContent>
+                    </Modal>
                   </Box>
                   <Box ml='5px'>
                     {token ? (

@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import { Table } from 'antd'
-import { Button } from '@chakra-ui/react'
+import { Button, Box } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import axios from 'utils/axios'
@@ -41,19 +41,14 @@ function PendingRooms() {
       dataIndex: '_id',
       key: '_id',
       render: (id: string) => (
-        <Button colorScheme='orange' mr='10px'>
-          <Link to={`/rooms/${id}/preview`}>Xem</Link>
-        </Button>
-      ),
-    },
-    {
-      title: 'Edit',
-      dataIndex: '_id',
-      key: '_id',
-      render: (id: string) => (
-        <Button colorScheme='orange' mr='10px'>
-          <Link to={`rooms/${id}/edit`}>Edit</Link>
-        </Button>
+        <Box>
+          <Button colorScheme='orange' mr='10px'>
+            <Link to={`/rooms/${id}/preview`}>Xem</Link>
+          </Button>
+          <Button colorScheme='orange' mr='5px'>
+            <Link to={`/rooms/${id}/edit`}>Edit</Link>
+          </Button>
+        </Box>
       ),
     },
   ]

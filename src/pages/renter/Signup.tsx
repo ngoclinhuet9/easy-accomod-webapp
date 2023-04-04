@@ -198,6 +198,34 @@ const SignUp = () => {
                       </FormErrorMessage>
                     </FormControl>
                     <FormControl
+                      id='phone'
+                      isRequired
+                      isInvalid={Boolean(errors?.email)}
+                      mt={4}>
+                      <FormLabel>Số điện thoại</FormLabel>
+                      <InputGroup size='lg'>
+                        <Input
+                          name='phone'
+                          required
+                          borderRadius='3rem'
+                          ref={register({
+                            pattern: {
+                              value: /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/,
+                              message: 'Số điện thoại không hợp lệ',
+                            },
+                          })}
+                          _placeholder={{ fontSize: 'md' }}
+                          _focus={{
+                            borderColor: 'orange.500',
+                            boxShadow: '0 0 5px 0 rgba(246,94,57,.5)',
+                          }}
+                        />
+                      </InputGroup>
+                      <FormErrorMessage>
+                        {errors.phone?.message}
+                      </FormErrorMessage>
+                    </FormControl>
+                    <FormControl
                       id='password'
                       isRequired
                       mt={4}

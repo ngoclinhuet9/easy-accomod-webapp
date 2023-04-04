@@ -33,6 +33,7 @@
     "react-hook-form": "^6.13.1",
     "react-icons": "^3.11.0",
     "react-leaflet": "^3.0.2",
+    "react-modal": "^3.16.1",
     "react-paginate": "^6.5.0",
     "react-query": "^2.26.4",
     "react-redux": "^7.2.2",
@@ -60,7 +61,13 @@
       "react-app/jest"
     ],
     "eol-last": 0,
-    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }]
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxEOF": 0
+      }
+    ]
   },
   "browserslist": [
     ">0.2%",

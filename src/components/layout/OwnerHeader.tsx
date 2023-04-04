@@ -20,7 +20,8 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  useToast
+  useToast,
+  Text
 } from '@chakra-ui/react'
 import axios from 'utils/axios'
 import { auth } from 'firebase-config'
@@ -150,9 +151,14 @@ export default function Header() {
           m='0 auto'
           backgroundColor='blue'
           alignItems='center'>
-          <Link to='/'>
-            <Image src={Logo} width='60px' height='60px' />
-          </Link>
+          <Box width='100%'>
+            <Link to='/'>
+              <Image display='inline' src={Logo} width='60px' height='60px' />
+              <Text display='inline' fontSize='xl' fontWeight='500' ml={4} position='absolute' left='240px' top='29px'>
+                    3S PLACE
+              </Text>
+            </Link>
+          </Box>
           <Spacer />
           {name !== '' ? (
             <>
