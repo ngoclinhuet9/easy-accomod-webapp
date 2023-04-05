@@ -78,8 +78,8 @@ const PlaceDetailsComponent = () => {
   const [details, setDetails] = useState<Intro>()
   const [isBookmarked, setIsBookmarked] = useState(true)
   const [reviews, setReviews] = useState([])
-  const [startDate, setStartDate] = useState(date.toString())
-  const [endDate, setEndDate] = useState(date.toString())
+  const [startDate, setStartDate] = useState('2023/04/05')
+  const [endDate, setEndDate] = useState('2023/04/05')
   const history = useHistory()
   const handleScroll = () => {
     const position = window.pageYOffset
@@ -127,7 +127,7 @@ const PlaceDetailsComponent = () => {
       console.log(endDate)
       toast({
         title: 'Ngày kết thúc cần lớn hơn ngày bắt đầu',
-        description: 'Vui lòng điền vào những trường yêu cầu',
+        description: 'Vui lòng điền lại ngày kết thúc',
         status: 'error',
         duration: 3000,
         isClosable: true,
@@ -251,16 +251,10 @@ const PlaceDetailsComponent = () => {
                   {/* <Price /> */}
                   <Reviews roomId={details?._id} reviews={reviews} />
                   <PolicyAndRule rule={details?.rule} />
-                  <Location />
                 </Box>
               </Box>
               <Box padding='1.5rem 0' flex='2'>
                 <Flex width='100%' flexDirection='row'>
-                  <Box>
-                    <Button onClick={backToScreen} variant='link'>
-                      Trở về
-                    </Button>
-                  </Box>
                   <Box ml='16px'>
                     <Button colorScheme='orange' onClick={onOpen}>
                       Đặt phòng
@@ -310,10 +304,11 @@ const PlaceDetailsComponent = () => {
                           <Button
                             colorScheme='orange'
                             mb='15px'
+                            mr='20px'
                             onClick={() => next()}>
                             Thanh toán sau
                           </Button>
-                          <Button colorScheme='orange' mr='80px' mb='15px'>
+                          <Button colorScheme='orange' mr='50px' mb='15px'>
                             Thanh toán ngay
                           </Button>
                         </ModalFooter>

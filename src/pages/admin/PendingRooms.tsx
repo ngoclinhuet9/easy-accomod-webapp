@@ -42,17 +42,7 @@ function PendingRooms() {
       key: '_id',
       render: (id: string) => (
         <Button colorScheme='orange' mr='10px'>
-          <Link to={`/rooms/${id}/preview`}>VIEW</Link>
-        </Button>
-      ),
-    },
-    {
-      title: 'Remake',
-      dataIndex: '_id',
-      key: '_id',
-      render: (id: string) => (
-        <Button colorScheme='orange' mr='10px'>
-          <Link to={`rooms/${id}/renew`}> EDIT</Link>
+          <Link to={`/rooms/${id}/preview`}>Xem</Link>
         </Button>
       ),
     },

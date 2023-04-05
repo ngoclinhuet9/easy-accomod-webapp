@@ -64,23 +64,22 @@ function RentedRooms() {
         let result: any[] = []
         res.data.data.forEach((item: any) => {
           result.push({
-            roomName: item.room.name,
-            renterName: item.renter.name,
-            renterPhone: item.renter.phone,
-            renterEmail: item.renter.email,
+            roomName: item.room?.name,
+            renterName: item.renter?.name,
+            renterPhone: item.renter?.phone,
+            renterEmail: item.renter?.email,
             renterRoomID: item._id,
-            payFlag: item.payFlag,
-            status: item.payFlag ? 'Đã thanh toán' : 'Chưa thanh toán',
+            payFlag: item?.payFlag,
+            status: item?.payFlag ? 'Đã thanh toán' : 'Chưa thanh toán',
           })
         })
-
         setRentRoom(result)
       })
       .catch((err) => {
         console.log(err)
       })
   }, [])
-
+  console.log(rentRoom, 'n----linh')
   // const handleRemake = (id: any) => {
   //   axios
   //     .put(`/owner/rooms/${id}/return`)
