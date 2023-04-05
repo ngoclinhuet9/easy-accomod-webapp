@@ -21,7 +21,7 @@ import {
   MenuList,
   MenuItem,
   useToast,
-  Text
+  Text,
 } from '@chakra-ui/react'
 import axios from 'utils/axios'
 import { auth } from 'firebase-config'
@@ -132,7 +132,6 @@ export default function Header() {
               <Button variant='ghost'>
                 <Link to='/signup'>Đăng ký</Link>
               </Button>
-
             </DrawerBody>
           </DrawerContent>
         </DrawerOverlay>
@@ -162,9 +161,6 @@ export default function Header() {
           <Spacer />
           {name !== '' ? (
             <>
-              <Button colorScheme='orange'>
-                <Link to='/create-room'>Create new room</Link>
-              </Button>
               <Menu>
                 <MenuButton
                   px={8}

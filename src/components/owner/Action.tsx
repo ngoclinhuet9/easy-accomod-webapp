@@ -1,7 +1,7 @@
 import { Box, Button, Flex, useToast } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import axios from 'utils/axios'
-import { useParams, useRouteMatch } from 'react-router-dom'
+import { useParams, useRouteMatch, useHistory } from 'react-router-dom'
 
 type Params = {
   room_id: string
@@ -11,6 +11,7 @@ const Actions = (props: any) => {
   const toast = useToast()
   const params: Params = useParams()
   const router = useRouteMatch()
+  const history = useHistory()
 
   const [typePage, setTypeState] = useState('')
 
@@ -41,6 +42,7 @@ const Actions = (props: any) => {
           isClosable: true,
           position: 'top',
         })
+        history.push('/')
       })
       .catch((err) => {
         console.log(err)
@@ -57,7 +59,7 @@ const Actions = (props: any) => {
 
   const removeRent = (id: any) => {
     axios
-      .delete(`owner/rooms/${params?.room_id}/rent`)
+      .put(`owner/rooms/${params?.room_id}/return`)
       .then((res) => {
         toast({
           title: 'Thành công',
@@ -67,6 +69,34 @@ const Actions = (props: any) => {
           isClosable: true,
           position: 'top',
         })
+        history.push('/')
+      })
+      .catch((err) => {
+        console.log(err)
+        toast({
+          title: 'Có sự cố xảy ra',
+          description: 'Bạn không đủ quyền để truy cập trang này',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+          position: 'top',
+        })
+      })
+  }
+
+  const deleteRoom = (id: any) => {
+    axios
+      .delete(`owner/rooms/${params?.room_id}/delete`)
+      .then((res) => {
+        toast({
+          title: 'Thành công',
+          description: 'Bạn đã xóa phòng thành công',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+          position: 'top',
+        })
+        history.push('/')
       })
       .catch((err) => {
         console.log(err)
@@ -114,7 +144,7 @@ const Actions = (props: any) => {
         {(status === 'REJECTED' || typePage === 'live_room') && (
           <Button
             outline='0'
-            onClick={removeRent}
+            onClick={deleteRoom}
             fontSize='1.25rem'
             colorScheme='red'
             mr='10px'

@@ -169,7 +169,6 @@ const ViewRoom = () => {
                   {/* <Price /> */}
                   <Reviews roomId={details?._id} reviews={reviews} />
                   <PolicyAndRule rule={details?.rule} />
-                  <Location />
                 </Box>
               </Box>
               <Box flex='1'>
